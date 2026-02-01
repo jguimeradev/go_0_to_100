@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 var (
@@ -17,6 +18,19 @@ var (
 	White   = "\033[97m"
 )
 
+func formatModTime(modTime string) string {
+
+	m := strings.Split(modTime, " ")
+
+	b, _, _ := strings.Cut(m[1], ".")
+
+	m[1] = b
+
+	modified := strings.Join(m[:2], " ")
+
+	return modified
+}
+
 func main() {
 
 	if len(os.Args) < 2 {
@@ -27,6 +41,7 @@ func main() {
 	var path string
 
 	//TODO: fix number of args
+
 	path = os.Args[2]
 
 	switch os.Args[1] {
@@ -41,9 +56,7 @@ func main() {
 
 			info, _ := file.Info()
 
-			//TODO: format ModTime
-
-			fmt.Println(info.Mode().Perm().String(), info.Size(), info.ModTime(), info.Name())
+			fmt.Println(info.Mode().Perm().String(), info.Size(), formatModTime(info.ModTime().String()), info.Name())
 		}
 
 	default:
