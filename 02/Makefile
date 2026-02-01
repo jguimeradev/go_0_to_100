@@ -8,8 +8,9 @@ fmt:
 vet: fmt
 	go vet main.go
 
-build: vet
+clean: vet
+	go clean
+
+build: clean
 	go build -o main
 
-clean:
-	go clean
