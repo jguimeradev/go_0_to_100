@@ -27,6 +27,7 @@ type env struct {
 func readEnvFile(line string) {
 
 	fmt.Println("line")
+	strings.Split(line, "=")
 
 }
 
